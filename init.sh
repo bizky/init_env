@@ -7,10 +7,10 @@ SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 #####################################################################
 # Install SuperFile
 #####################################################################
-#bash -c "$(curl -sLo- https://superfile.netlify.app/install.sh)"
+bash -c "$(curl -sLo- https://superfile.netlify.app/install.sh)"
 
-#mkdir ~/.config/superfile -p
-#cp $SCRIPT_DIR/superfile/* ~/.config/superfile/
+mkdir ~/.config/superfile -p
+cp $SCRIPT_DIR/superfile/* ~/.config/superfile/
 
 #####################################################################
 # Install ProxyChain
