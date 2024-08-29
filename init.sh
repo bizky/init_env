@@ -2,7 +2,13 @@
 
 SCRIPT_PATH=$(readlink -f "$0")
 SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
-#echo "脚本所在的目录: $SCRIPT_DIR"
+PROJECT_DIR="$HOME/project"
+
+#####################################################################
+# Install Python3 Alias
+#####################################################################
+echo "alias py='python3'" >> $HOME/.bashrc
+
 
 #####################################################################
 # Install SuperFile
@@ -15,13 +21,14 @@ cp $SCRIPT_DIR/superfile/* ~/.config/superfile/
 #####################################################################
 # Install ProxyChain
 #####################################################################
-mkdir -p ~/project/
-wget -nv https://github.com/rofl0r/proxychains-ng/releases/download/v4.17/proxychains-ng-4.17.tar.xz -O ~/project/proxychains-ng.tar.xz
-tar -xf ~/project/proxychains-ng.tar.xz -C ~/project/
-mv ~/project/proxychains-ng*/ ~/project/proxychains-ng/
-cd ~/project/proxychains-ng/
+mkdir -p $PROJECT_DIR
+wget -nv https://github.com/rofl0r/proxychains-ng/releases/download/v4.17/proxychains-ng-4.17.tar.xz -O $PROJECT_DIR/proxychains-ng.tar.xz
+tar -xf $PROJECT_DIR/proxychains-ng.tar.xz -C $PROJECT_DIR/
+mv $PROJECT_DIR/proxychains-ng*/ $PROJECT_DIR/proxychains-ng/
+cd $PROJECT_DIR/proxychains-ng/
 ./configure
 make
 
-echo "alias pc='~/project/proxychains-ng/proxychains4 -f ~/project/proxychains-ng/proxychains.conf'" >> ~/.bashrc
-cp $SCRIPT_DIR/proxychains-ng/proxychains.conf ~/project/proxychains-ng/proxychains.conf
+echo "alias pc='$PROJECT_DIR/proxychains-ng/proxychains4 -f $PROJECT_DIR/proxychains-ng/proxychains.conf'" >> ~/.bashrc
+cp $SCRIPT_DIR/proxychains-ng/proxychains.conf $PROJECT_DIR/proxychains-ng/proxychains.conf
+rm $PROJECT_DIR/proxychains-ng.tar.xz
