@@ -14,9 +14,9 @@ echo "alias py='python3'" >> $HOME/.bashrc
 # Install SuperFile
 #####################################################################
 bash -c "$(curl -sLo- https://superfile.netlify.app/install.sh)"
-
 mkdir ~/.config/superfile -p
 cp $SCRIPT_DIR/superfile/* ~/.config/superfile/
+
 
 #####################################################################
 # Install ProxyChain
@@ -28,7 +28,32 @@ mv $PROJECT_DIR/proxychains-ng*/ $PROJECT_DIR/proxychains-ng/
 cd $PROJECT_DIR/proxychains-ng/
 ./configure
 make
-
 echo "alias pc='$PROJECT_DIR/proxychains-ng/proxychains4 -f $PROJECT_DIR/proxychains-ng/proxychains.conf'" >> ~/.bashrc
 cp $SCRIPT_DIR/proxychains-ng/proxychains.conf $PROJECT_DIR/proxychains-ng/proxychains.conf
 rm $PROJECT_DIR/proxychains-ng.tar.xz
+
+
+#####################################################################
+# Install Custom docker-pull
+#####################################################################
+
+function docker-pull() {
+
+  DOCKER_HUB_DOMAIN="hub.hotmonitor.top"
+  local image_name="$1"
+  set -x
+  docker pull -q $DOCKER_HUB_DOMAIN/library/"$image_name";
+  docker tag $DOCKER_HUB_DOMAIN/library/"$image_name" "$image_name";
+  docker rmi $DOCKER_HUB_DOMAIN/library/"$image_name";
+  set +x
+}
+
+echo "
+# docker-pull 函数
+$(declare -f docker-pull)
+" >> ~/.bashrc
+
+
+
+source ~/.bashrc
+
