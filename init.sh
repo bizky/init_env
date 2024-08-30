@@ -13,7 +13,7 @@ echo "alias py='python3'" >> $HOME/.bashrc
 #####################################################################
 # Install SuperFile
 #####################################################################
-bash -c "$(curl -sLo- https://superfile.netlify.app/install.sh)"
+bash -c "$(curl -sLo- https://superfile.netlify.app/install.sh | sed  's/https:\/\/github.com\/yorukot\/superfile/https:\/\/gproxy.hotmonitor.top\/github.com\/yorukot\/superfile/g')"
 mkdir ~/.config/superfile -p
 cp $SCRIPT_DIR/superfile/* ~/.config/superfile/
 
@@ -22,7 +22,7 @@ cp $SCRIPT_DIR/superfile/* ~/.config/superfile/
 # Install ProxyChain
 #####################################################################
 mkdir -p $PROJECT_DIR
-wget -nv https://github.com/rofl0r/proxychains-ng/releases/download/v4.17/proxychains-ng-4.17.tar.xz -O $PROJECT_DIR/proxychains-ng.tar.xz
+wget -nv https://gproxy.hotmonitor.top/github.com/rofl0r/proxychains-ng/releases/download/v4.17/proxychains-ng-4.17.tar.xz -O $PROJECT_DIR/proxychains-ng.tar.xz
 tar -xf $PROJECT_DIR/proxychains-ng.tar.xz -C $PROJECT_DIR/
 mv $PROJECT_DIR/proxychains-ng*/ $PROJECT_DIR/proxychains-ng/
 cd $PROJECT_DIR/proxychains-ng/
